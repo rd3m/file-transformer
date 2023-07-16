@@ -1,0 +1,20 @@
+{% extends "core/base.html" %} {% load custom_tags %} {% block content %}
+<div class="container mx-auto my-10">
+	<div class="max-w-lg shadow-lg mx-auto rounded-xl p-10">
+		<h2 class="text-2xl font-bold mb-6">Sign up</h2>
+		<form method="post" class="bg-base-100">
+			{% csrf_token %}
+			{% for field in form %}
+			<div class="form-control mb-4">
+				<label class="label" for="{{ field.auto_id }}">{{ field.label }}</label>
+				{{ field|addcss:'input input-bordered input-primary' }}
+				{% for error in field.errors %}
+				<p class="text-error text-sm">{{ error }}</p>
+				{% endfor %}
+			</div>
+			{% endfor %}
+			<button type="submit" class="btn btn-primary w-full">Sign up</button>
+		</form>
+	</div>
+</div>
+{% endblock %}

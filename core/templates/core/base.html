@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="File Transformer - Transform your files with NLP">
+		<meta name="author" content="Riley de Mestre">
+
+		<title>{% block title %}File Transformer{% endblock %}</title>
+		<link href="{% static 'css/output.css' %}" rel="stylesheet" />
+	</head>
+	<body class="flex flex-col min-h-screen">
+		<header>
+			<nav class="navbar navbar-expand-lg bg-base-300 text-base-content">
+				<div class="flex-1">
+					<a href="/" class="btn btn-ghost normal-case text-xl">File Transformer</a>
+				</div>
+				<div class="flex-none">
+					<ul class="menu menu-horizontal px-1">
+						{% if request.user.is_authenticated %}
+							<li>
+								<a href="{% url 'logout' %}" class="btn btn-accent text-white">Logout</a>
+							</li>
+						{% else %}
+							{% if "login" not in request.path %}
+								<li>
+									<a href="{% url 'login' %}" class="btn btn-accent text-white">Login</a>
+								</li>
+							{% endif %}
+						{% endif %}
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<main id="content" class='flex-grow'>{% block content %} {% endblock %}</main>
+		<footer class="footer footer-center p-4 bg-base-300 text-base-content">
+			<div>
+				<p>Copyright © 2023 - Made for fun by Riley de Mestre</p>
+			</div>
+		</footer>
+		{% block extra_js %}
+		{% endblock %}
+	</body>
+</html>
